@@ -38,6 +38,14 @@ func (e *Engine) SetClient(c *dockerclient.DockerClient) {
 	e.client = c
 }
 
+func (e *Engine) SetClientAuth(username, password, email string) {
+	e.clientAuth = &dockerclient.AuthConfig{
+		Username: username,
+		Password: password,
+		Email:    email,
+	}
+}
+
 // IsConnected returns true if the engine is connected to a remote docker API
 func (e *Engine) IsConnected() bool {
 	return e.client != nil
