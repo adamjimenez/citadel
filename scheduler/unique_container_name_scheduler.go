@@ -9,7 +9,7 @@ type UniqueContainerNameScheduler struct {
 }
 
 func (u *UniqueContainerNameScheduler) Schedule(c *citadel.Image, e *citadel.Engine) (bool, error) {
-	containers, err := e.ListContainers(false)
+	containers, err := e.ListContainers(false, false, "")
 	if err != nil {
 		return false, err
 	}

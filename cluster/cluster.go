@@ -77,11 +77,11 @@ func (c *Cluster) RemoveEngine(e *citadel.Engine) error {
 }
 
 // ListContainers returns all the containers running in the cluster
-func (c *Cluster) ListContainers(all bool) []*citadel.Container {
+func (c *Cluster) ListContainers(all bool, size bool, filter string) []*citadel.Container {
 	out := []*citadel.Container{}
 
 	for _, e := range c.engines {
-		containers, _ := e.ListContainers(all)
+		containers, _ := e.ListContainers(all, size, filter)
 
 		out = append(out, containers...)
 	}
@@ -166,7 +166,7 @@ func (c *Cluster) Start(image *citadel.Image, pull bool) (*citadel.Container, er
 		}
 
 		if canrun {
-			containers, err := e.ListContainers(false)
+			containers, err := e.ListContainers(false, false, "")
 			if err != nil {
 				return nil, err
 			}
@@ -231,7 +231,7 @@ func (c *Cluster) ClusterInfo() *citadel.ClusterInfo {
 	reservedCpus := 0.0
 	reservedMemory := 0.0
 	for _, e := range c.engines {
-		c, err := e.ListContainers(false)
+		c, err := e.ListContainers(false, false, "")
 		if err != nil {
 			// skip engines that are not available
 			continue

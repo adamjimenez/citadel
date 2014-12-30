@@ -60,7 +60,7 @@ func main() {
 
 	log.Printf("ran container %s\n", container.ID)
 
-	containers := c.ListContainers(false)
+	containers := c.ListContainers(false, false, "")
 
 	c1 := containers[0]
 

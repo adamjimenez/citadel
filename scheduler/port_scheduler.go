@@ -6,7 +6,7 @@ import "github.com/citadel/citadel"
 type PortScheduler struct{}
 
 func (s *PortScheduler) Schedule(i *citadel.Image, e *citadel.Engine) (bool, error) {
-	containers, err := e.ListContainers(false)
+	containers, err := e.ListContainers(false, false, "")
 	if err != nil {
 		return false, err
 	}
