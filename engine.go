@@ -170,10 +170,10 @@ func (e *Engine) updatePortInformation(c *Container) error {
 	return parsePortInformation(info, c)
 }
 
-func (e *Engine) ListContainers(all bool) ([]*Container, error) {
+func (e *Engine) ListContainers(all bool, size bool) ([]*Container, error) {
 	out := []*Container{}
 
-	c, err := e.client.ListContainers(all, true, "")
+	c, err := e.client.ListContainers(all, size, "")
 	if err != nil {
 		return nil, err
 	}
