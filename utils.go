@@ -134,6 +134,7 @@ func FromDockerContainer(id, image string, engine *Engine) (*Container, error) {
 			Labels:      labels,
 			NetworkMode: networkMode,
 			Publish:     info.HostConfig.PublishAllPorts,
+			Privileged:  info.HostConfig.Privileged,
 			RestartPolicy: RestartPolicy{
 				Name:              info.HostConfig.RestartPolicy.Name,
 				MaximumRetryCount: info.HostConfig.RestartPolicy.MaximumRetryCount,
