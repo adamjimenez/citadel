@@ -214,7 +214,7 @@ func (e *Engine) Restart(container *Container, timeout int) error {
 }
 
 func (e *Engine) Remove(container *Container) error {
-	return e.client.RemoveContainer(container.ID, true)
+	return e.client.RemoveContainer(container.ID, true, false)
 }
 
 func (e *Engine) Version() (*dockerclient.Version, error) {
@@ -227,7 +227,7 @@ func (e *Engine) Events(h EventHandler) error {
 	}
 	e.eventHandler = h
 
-	e.client.StartMonitorEvents(e.handler)
+	e.client.StartMonitorEvents(e.handler, nil, nil)
 
 	return nil
 }
@@ -236,7 +236,7 @@ func (e *Engine) String() string {
 	return fmt.Sprintf("engine %s addr %s", e.ID, e.Addr)
 }
 
-func (e *Engine) handler(ev *dockerclient.Event, args ...interface{}) {
+func (e *Engine) handler(ev *dockerclient.Event, ec chan error, args ...interface{}) {
 	event := &Event{
 		Engine: e,
 		Type:   ev.Status,
