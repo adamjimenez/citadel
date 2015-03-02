@@ -113,6 +113,7 @@ func (e *Engine) Start(c *Container, pullImage bool) error {
 			MaximumRetryCount: i.RestartPolicy.MaximumRetryCount,
 		},
 		NetworkMode: i.NetworkMode,
+		Privileged:  i.Privileged,
 	}
 
 	for _, b := range i.BindPorts {
