@@ -36,7 +36,7 @@ func (r *ResourceManager) PlaceContainer(c *citadel.Container, engines []*citade
 	}
 
 	if len(scores) == 0 {
-		return nil, fmt.Errorf("no resources avaliable to schedule container")
+		return nil, fmt.Errorf("no resources available to schedule container")
 	}
 
 	sortScores(scores)
